@@ -1,33 +1,19 @@
-# Preparación de la entrevista y tareas pendientes del grupo
+# Preparación de la entrevista y tareas del grupo
 
 > Este documento lo generó Claude Code en la conversación [`06`](../conversaciones-ia/06-claude-code-revision-final.md) como **material de estudio**. No es una fuente. Las respuestas son un guion: en la entrevista hay que explicarlas con vuestras palabras, y si alguna no os convence, comprobadla en los apuntes o en [fuentes.md](fuentes.md).
 
-## 1. Tareas que sólo puede hacer cada integrante
+## 1. Tareas de cada integrante (estado a 26/10/2026)
 
-La IA no puede hacer estas tareas por vosotros, y son las que demuestran vuestra participación (criterios 3 y 7 de la rúbrica). Cada tarea deja una **conversación propia** en `conversaciones-ia/` y una línea en [PROCESO.md](../PROCESO.md).
-
-| Quién | Tarea | Qué guardar |
+| Quién | Tarea | Estado |
 |---|---|---|
-| **Guillermo A.** (Contenido) | Releer las 7 ideas y el glosario. Elegir **al menos dos** ideas o definiciones y reescribirlas con sus palabras en `index.html`. Si usa IA para comparar su versión con la de los apuntes, guardar esa conversación. | Conversación `07-…`, si la hay. Fila nueva en el *Registro de correcciones* de PROCESO.md. |
-| **Juan R.** (Verificación) | Abrir cada enlace de [fuentes.md](fuentes.md) y comprobar que dice lo que indicamos (por ejemplo, buscar "600,000" en la cheat sheet de OWASP). Probar las 3 demos con valores propios. | Una nota en la fase 4.a de PROCESO.md: qué enlaces abrió y qué encontró. |
-| **Pablo V.** (Apoyo y revisión) | **Tercera prueba de la skill propia con otra IA** (Copilot Chat), como recomienda la fase 4.d. Ver el procedimiento más abajo. | `conversaciones-ia/08-prueba-skill-propia-copilot.md` (con *Copy All*) y una sección nueva en [prueba-skill-propia.md](prueba-skill-propia.md). |
-| **Todos** | Abrir la web publicada **en vuestro móvil**, sin iniciar sesión, y probar el menú y una demo. | Marcar la casilla en *Revisión del grupo* de PROCESO.md. |
-| **Todos** | Decidir si aceptáis el alcance (fase 1) y las skills. Donde ponga «Pendiente de validar por el grupo», poner quién lo revisó y qué opina. | PROCESO.md |
+| **Todos** | Revisar y aceptar las decisiones de las fases 1 a 5 y la rotación de roles | Hecho: los cuatro lo revisamos y aceptamos ([PROCESO.md](../PROCESO.md)). |
+| **Guillermo A.** (Contenido) | Releer las 7 ideas y el glosario | Hecho. Decisión: no se reescribe nada, porque el texto se entiende bien. |
+| **Juan R.** (Verificación) | Abrir cada enlace de [fuentes.md](fuentes.md) y comprobar que dice lo que indicamos | Hecho. |
+| **Todos** | Abrir la web publicada en el móvil, sin iniciar sesión | Hecho. |
+| **Pablo V.** (Apoyo y revisión) | Tercera prueba de la skill propia con Copilot Chat | Descartada: el apartado 3.5 del enunciado no la pide y ya hay dos pruebas. |
+| **Todos** | Preparar la entrevista con el guion de abajo | Pendiente hasta la entrevista. |
 
-### Procedimiento para la prueba con Copilot (Pablo V.)
-
-1. **Antes de empezar**, escribir en `prueba-skill-propia.md` el resultado esperado de esta tercera prueba. Si no, la prueba no vale.
-2. Abrir el repositorio en VS Code, y abrir Copilot Chat en una conversación **nueva**.
-3. Pegar este prompt:
-
-   ```
-   Lee el fichero skills/revision-entradas-salidas/SKILL.md y sigue sus instrucciones al pie de la letra
-   para revisar el fichero evidencias/prueba-skill/entrada.py. Lenguaje: Python con Flask. Los datos de la
-   tabla productos los pueden escribir los vendedores desde un panel web. No ejecutes el código.
-   ```
-
-4. Al terminar: menú contextual de la conversación → **Copy All** → pegar sin tocar en `conversaciones-ia/08-prueba-skill-propia-copilot.md`. Antes de subirlo, revisar que no haya rutas con vuestro usuario (`C:\Users\...`) ni correos, y sustituirlos por `<HOME>` y `<email>`.
-5. Comparar con lo esperado: ¿encuentra los mismos flujos que Claude en la prueba 1? ¿Pone la columna *Vulnerabilidad*? ¿Avisa de comprobar las reglas de Bandit? Anotar las diferencias.
+Como el texto de la web lo redactó la IA y no lo hemos reescrito, en la entrevista es especialmente importante explicar cada idea **con vuestras palabras**, sin repetir la web de memoria.
 
 ## 2. Preguntas probables y guion de respuesta
 

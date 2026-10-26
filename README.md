@@ -29,7 +29,7 @@ El grupo tiene **cuatro integrantes**, en lugar de los tres previstos en el enun
 | [`evidencias/skill-publica.md`](evidencias/skill-publica.md) | Análisis y aplicación de la skill pública `sharp-edges` (Trail of Bits). |
 | [`skills/revision-entradas-salidas/SKILL.md`](skills/revision-entradas-salidas/SKILL.md) | Skill propia: revisión didáctica de entradas no confiables y codificación de salidas. |
 | [`evidencias/prueba-skill-propia.md`](evidencias/prueba-skill-propia.md) | Prueba de la skill propia: resultado esperado, obtenido, comparación y mejoras. |
-| [`evidencias/preparacion-entrevista.md`](evidencias/preparacion-entrevista.md) | Tareas pendientes de cada integrante y guion de preguntas para la entrevista. |
+| [`evidencias/preparacion-entrevista.md`](evidencias/preparacion-entrevista.md) | Tareas de cada integrante y guion de preguntas para la entrevista. |
 
 ## Ver la web en local
 

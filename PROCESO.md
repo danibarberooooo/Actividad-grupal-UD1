@@ -3,7 +3,7 @@
 **Grupo 5 · Tema:** Desarrollo seguro y mitigaciones (`pps1_06 seguridad_lenguajes.md`)
 **Herramienta de IA usada:** Claude Code (CLI de Anthropic), modelo Claude Opus 5.5, en Windows. Algunas tareas se delegaron en **subagentes**: instancias nuevas del modelo, sin acceso a la conversación principal. Las usamos cuando hacía falta una "conversación distinta", como en la prueba de la skill propia.
 
-> **Transparencia:** casi todo el material de este repositorio lo generó Claude Code el 26/10/2026, a partir de una única petición amplia de Daniel B. ("hazme todo lo que pide"), en la conversación [`01`](conversaciones-ia/01-claude-code-produccion.md). Las decisiones de las fases 1 a 4 las **propuso y aplicó la IA**, y así se indica en el campo *Participación*. La sección [Revisión del grupo](#revisión-del-grupo) recoge lo que los cuatro integrantes deben revisar, decidir y firmar antes de entregar. No presentamos como decisiones del grupo las que todavía no hemos revisado.
+> **Transparencia:** casi todo el material de este repositorio lo generó Claude Code el 26/10/2026, a partir de una única petición amplia de Daniel B. ("hazme todo lo que pide"), en la conversación [`01`](conversaciones-ia/01-claude-code-produccion.md). Las decisiones de las fases 1 a 4 las **propuso y aplicó la IA**, y así se indica en el campo *Participación*. El 26/10/2026 los cuatro integrantes las revisamos y aceptamos, y lo indicamos en cada fase. La sección [Revisión del grupo](#revisión-del-grupo) recoge las tareas que quedan.
 
 ## Organización del equipo
 
@@ -12,9 +12,9 @@
 | Contenido (síntesis, glosario, fuentes) | Guillermo A. | Juan R. | Pablo V. |
 | Verificación (afirmaciones, ejemplos, enlaces) | Juan R. | Pablo V. | Daniel B. |
 | Web y publicación (estructura, accesibilidad, GitHub Pages) | Daniel B. | Guillermo A. | Juan R. |
-| Apoyo y revisión (relectura completa, prueba en móvil, segunda prueba de la skill con otra IA) | Pablo V. | Daniel B. | Guillermo A. |
+| Apoyo y revisión (relectura completa, prueba en móvil) | Pablo V. | Daniel B. | Guillermo A. |
 
-Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no tres, así que se añade el rol de *apoyo y revisión*. Cada persona pasa por tres roles distintos y en cada sesión están cubiertos los cuatro. *(Rotación propuesta, pendiente de confirmar por el grupo.)*
+Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no tres, así que se añade el rol de *apoyo y revisión*. Cada persona pasa por tres roles distintos y en cada sesión están cubiertos los cuatro. *(Rotación confirmada por los cuatro integrantes el 26/10/2026.)*
 
 ## Índice de conversaciones
 
@@ -27,6 +27,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | [`04-prueba-skill-propia-v1.1.md`](conversaciones-ia/04-prueba-skill-propia-v1.1.md) | 4 | Prueba 2 de la skill propia (versión mejorada), en una conversación nueva |
 | [`05-claude-code-revision-y-publicacion.md`](conversaciones-ia/05-claude-code-revision-y-publicacion.md) | 5 | Revisión de lo que faltaba, nombres del grupo, git, GitHub Pages y comprobación de la web publicada |
 | [`06-claude-code-revision-final.md`](conversaciones-ia/06-claude-code-revision-final.md) | 5 | Segunda revisión contra el enunciado, huecos del §8 en la web, prueba de la web publicada a 360 px y guía de la entrevista |
+| [`07-claude-code-validacion-del-grupo.md`](conversaciones-ia/07-claude-code-validacion-del-grupo.md) | 5 | Tercera revisión, conversación 06 completa, registro de la validación del grupo y decisiones sobre las tareas pendientes |
 
 ---
 
@@ -55,7 +56,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Alcance = **§8 completa + §6.2 + §6.3**, con la §1 (defensa en profundidad) como marco. **Cambios respecto al plan de la fase 0:** (a) se incluye la §6.3, porque el enunciado dice "desarrollo seguro **y mitigaciones**"; (b) cadena de suministro y DoS dejan de estar fuera y se integran en las ideas 5 y 3, porque así se cubren las 9 subsecciones de la §8 sin pasar de 7 ideas. |
 | **Justificación** | Ver la tabla de alcance. Lo que se excluye ya lo cubren otros bloques o desviaría el tema hacia la seguridad de los lenguajes en general. |
 | **Verificación** | Comprobamos que cada subsección de la §8 tiene al menos una idea clave, término del glosario o fase del SSDLC que la cubre (tabla de cobertura). |
-| **Participación** | Propuesta y aplicada por la IA. Pendiente de validar por el grupo. |
+| **Participación** | Propuesta y aplicada por la IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. |
 | **Conversación de origen** | `01-claude-code-produccion.md` (inicio) |
 
 ### Tabla de alcance
@@ -99,7 +100,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | (1) **Tres demos interactivas** en lugar de una: validación con lista blanca (§8.2), codificación de salida frente a XSS (§8.2/§6.1) y SHA-256 frente a PBKDF2 (§6.2/§8.7). (2) Diagrama SSDLC con HTML (`<details>`) en lugar de una imagen, para que sea accesible y se adapte al móvil. (3) **Cambio de la skill propia:** de "revisión de datos sensibles" (fase 0) a **"revisión de entradas y salidas"**. (4) Sin bibliotecas externas. |
 | **Justificación** | (1) La validación y la codificación son la diferencia clave de la §8.2 y se confunden fácilmente: dos demos separadas lo dejan claro. La demo 3 hace visible algo que suele creerse sin comprobarlo (que SHA-256 es "rápido"). (3) La skill de entradas y salidas está más ligada al núcleo del tema (§8.2) y a las demos. La revisión de datos sensibles se resolvió con un script de anonimización (fase 5), que es más fiable que una IA para esa tarea. (4) Menos superficie de ataque (§8.4) y nada que pueda dejar de funcionar. |
 | **Verificación** | Comprobamos que la estructura cumple el apartado 3.1 del enunciado: introducción, entre 5 y 7 ideas, glosario de al menos 5 términos, demo y fuentes. |
-| **Participación** | Propuesta y aplicada por la IA. Pendiente de validar por el grupo. |
+| **Participación** | Propuesta y aplicada por la IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ## Fase 3 · Investigar y producir
@@ -115,7 +116,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Cada idea lleva su referencia "Apuntes: §X" para poder contrastarla. Se añaden ejemplos que no están en los apuntes (la URL de facturas en la idea 4, el usuario de BD con permisos limitados en la idea 1). |
 | **Justificación** | Los ejemplos concretos ayudan a entender. El de la idea 4 es el caso típico de OWASP A01 (control de acceso roto). |
 | **Verificación** | Cada idea se contrastó con su sección de los apuntes, y las afirmaciones que van más allá de ellos con una fuente externa ([fuentes.md](evidencias/fuentes.md)). Ejemplo: los parámetros de PBKDF2 (600 000 iteraciones) se comprobaron en la OWASP Password Storage Cheat Sheet. |
-| **Participación** | IA. **Pendiente:** que el responsable de contenido relea las 7 ideas y reescriba con sus palabras lo que no entienda o no le convenza. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. **Decisión del grupo:** no se reescribe nada, porque tras la revisión consideramos que el texto se entiende bien. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ### 3.b Web y demostraciones
@@ -129,7 +130,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | La vista insegura de la demo 2 **no ejecuta** el JavaScript del atacante: se aísla en un iframe con sandbox y se *explica* qué habría pasado. La demo 3 usa **PBKDF2 en lugar de Argon2id**, y la web lo dice. |
 | **Justificación** | Una web didáctica pública no debe ejecutar cargas de XSS, aunque sean inofensivas. Argon2id no está en la Web Crypto API y exigiría una biblioteca externa; PBKDF2 está aceptada por OWASP y demuestra la misma idea (coste + sal). |
 | **Verificación** | Ver la fase 4.b. |
-| **Participación** | IA. **Pendiente:** que el responsable de web pruebe la página en su móvil. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. Los cuatro probamos la web publicada en nuestros móviles. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ### 3.c Skill propia
@@ -143,7 +144,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Alcance limitado a fragmentos cortos y a flujos fuente → destino. La criptografía y la autorización quedan fuera, y sólo se mencionan en "Observaciones fuera de alcance". |
 | **Justificación** | Una skill que lo revisa todo no se puede probar ni evaluar. Con un alcance estrecho, sus criterios de calidad sí son comprobables. |
 | **Verificación** | Ver la fase 4.d (dos pruebas en conversaciones distintas). |
-| **Participación** | IA. Pendiente de validar por el grupo. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ### 3.d Búsqueda de la skill pública
@@ -157,7 +158,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Elegimos **`sharp-edges`**. Descartamos `insecure-defaults` y `frontend-design`. |
 | **Justificación** | Trata el principio *secure by default* de la §8.1, se puede leer entero y no ejecuta código. Ver [skill-publica.md](evidencias/skill-publica.md#por-qué-la-elegimos). |
 | **Verificación** | Descargamos el SKILL.md como texto y lo leímos antes de usarlo. Comprobamos la licencia (CC BY-SA 4.0) y el commit del fichero (`5f0a765`, 29/04/2026). |
-| **Participación** | IA. Pendiente de validar por el grupo. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ## Fase 4 · Verificar
@@ -173,7 +174,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Se **quitó el enlace** a los apuntes de la web y se cita como documento de acceso restringido, con su fecha y su commit. |
 | **Justificación** | El enunciado exige que la web funcione sin iniciar sesión; un enlace roto la empeora. |
 | **Verificación** | Además de los códigos HTTP, buscamos en las páginas de OWASP las frases que respaldan las afirmaciones: "allowlist", `textContent` como *sink* seguro, PBKDF2 y FIPS-140, y "SHA-256 no adecuado". |
-| **Participación** | IA. **Pendiente:** que el responsable de verificación abra cada enlace de [fuentes.md](evidencias/fuentes.md) y confirme que dice lo que indicamos. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. Juan R. abrió cada enlace de [fuentes.md](evidencias/fuentes.md) y confirmó que dice lo que indicamos. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ### 4.b Pruebas de la web y de las demos
@@ -187,7 +188,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Se mantiene el diseño. La web dice que los tiempos dependen del equipo y que lo importante es la **proporción**. |
 | **Justificación** | Los vectores oficiales prueban que la implementación es correcta, no sólo que "devuelve algo". |
 | **Verificación** | Es la propia verificación. |
-| **Participación** | IA. **Pendiente:** que el grupo pruebe la web publicada en sus móviles. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. Los cuatro probamos la web publicada en nuestros móviles. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ### 4.c Aplicación y valoración de la skill pública
@@ -201,7 +202,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | **7 aceptados, 2 aceptados en parte (SE-4, SE-7) y 1 rechazado (SE-8)**. Cambios en `js/demo.js`, en `index.html` (CSP) y en los tests. Detalle en [skill-publica.md](evidencias/skill-publica.md#4-aplicación-en-el-proyecto). |
 | **Justificación** | Aceptamos lo que mejora la demo o lo que enseña algo sin perder claridad. Rechazamos lo que convertiría la demo en una API de producción (SE-8) o lo que complicaría el código sin beneficio real (reescribir con `createElement`). |
 | **Verificación** | **No dimos por buenos los hallazgos sin comprobarlos.** Verificamos en Chrome que `<svg><script>` tiene `tagName` en minúsculas y que `jav&#x09;ascript:` escapaba a la expresión regular antigua. Después de corregir, el arnés detecta las dos cargas y la de `<iframe srcdoc>`. La CSP bloquea el `onerror` dentro del iframe (violación `script-src-attr`) y la página sigue funcionando desde `file://` y por HTTP. Añadimos tests para SE-2, SE-7 y SE-9. |
-| **Participación** | IA. Pendiente de validar por el grupo. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. |
 | **Conversación de origen** | `03-aplicacion-skill-publica-sharp-edges.md` (ejecución) y `01-claude-code-produccion.md` (decisiones y verificación) |
 
 ### 4.d Prueba de la skill propia (dos rondas)
@@ -215,7 +216,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Decisión** | Publicamos la **v1.1**, con 4 mejoras, y conservamos la v1.0 en `evidencias/prueba-skill/`. |
 | **Justificación** | Los problemas de la v1.0 afectaban a la utilidad didáctica (que el estudiante encuentre el nombre de la vulnerabilidad) y a la verificabilidad (identificadores de herramientas sin aviso). |
 | **Verificación** | El **resultado esperado se escribió antes** de lanzar cada prueba, como queda reflejado en el orden de la conversación 01. El registro de los subagentes muestra que sólo leyeron `SKILL.md` y el fichero de prueba, así que no vieron lo esperado. Comprobamos las afirmaciones técnicas del resultado: autoescape de `render_template_string` (documentación de Flask), `Markup.__radd__` (código de markupsafe), Bandit B602/B608 (documentación de Bandit) y la opción `root` de `sendFile` frente a `..` (código de `pillarjs/send`). Detalle en [prueba-skill-propia.md](evidencias/prueba-skill-propia.md). |
-| **Participación** | IA. Pendiente de validar por el grupo. **Recomendado:** repetir la prueba con Copilot Chat. |
+| **Participación** | IA. **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. **Decisión del grupo:** no se hace una tercera prueba con Copilot Chat. El apartado 3.5 del enunciado pide probar la skill en una conversación distinta de la de creación, y ya hay dos pruebas. |
 | **Conversación de origen** | `02-prueba-skill-propia-v1.0.md`, `04-prueba-skill-propia-v1.1.md` y `01-claude-code-produccion.md` |
 
 ## Fase 5 · Publicar y revisar
@@ -228,8 +229,8 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Resultado** | [`herramientas/exportar-conversacion.js`](herramientas/exportar-conversacion.js) convierte los historiales `.jsonl` de Claude Code en Markdown. Sustituye las rutas `C:\Users\…` por `<HOME>`, los correos por `<email>` y los términos que se le indiquen (apellido, usuario de Windows) por `<dato-personal>`. Después se buscaron en todo el repositorio el apellido, el usuario de Windows, el dominio del correo y las rutas `C:\Users`, sin ningún resultado. |
 | **Decisión** | Exportar con el script en lugar de usar `/export` y editar a mano. El script **no está en GitHub Pages**; es una herramienta del repositorio. |
 | **Justificación** | Anonimizar a mano 5 conversaciones largas es propenso a errores. El script es repetible y se puede revisar. |
-| **Verificación** | `grep` final sobre todo el repositorio (ver la conversación 01). **Pendiente del grupo:** publicar en GitHub Pages, abrir la web sin iniciar sesión y revisar la web publicada en el móvil. Los enlaces ya apuntan a `danibarberooooo/Actividad-grupal-UD1`. |
-| **Participación** | IA (preparación). **Pendiente:** publicación por el responsable de web. |
+| **Verificación** | `grep` final sobre todo el repositorio (ver la conversación 01). La publicación y la comprobación sin iniciar sesión se hicieron después (fases 5.b y 5.c). |
+| **Participación** | IA (preparación). **Revisado y aceptado por los cuatro integrantes** (Daniel B., Guillermo A., Juan R. y Pablo V.) el 26/10/2026. Publicación: Daniel B. (fase 5.b). |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
 
 ### 5.b Revisión de pendientes y publicación
@@ -260,6 +261,20 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Participación** | Daniel B. (lanzó la revisión). La IA hizo la revisión, las ediciones y las comprobaciones. |
 | **Conversación de origen** | `06-claude-code-revision-final.md` |
 
+### 5.d Validación del grupo y cierre
+
+| Campo | Registro |
+|---|---|
+| **Objetivo** | Comprobar qué faltaba por última vez, dejar registrada la revisión del grupo y cerrar las tareas pendientes. |
+| **Herramienta** | Claude Code, en una sesión nueva. Revisión del repositorio, `curl`, API de GitHub, `node --test` y el script de exportación. |
+| **Prompt** | «tienes que hacerme esto [enunciado] sobre este punto [sección 8 de los apuntes], mirame a ver que me falta», después «sobre el punto 1 dime que seria todo lo que tendriamos que validar resumidamente» y «hemos validado todos los integrantes todo». |
+| **Resultado** | No faltaba ningún archivo obligatorio. La web, el CSS y el JS publicados responden 200 y los tests pasan (11 de 11). La IA vio que la conversación 06 seguía incompleta (262 de 349 eventos) y la volvió a exportar. Después resumió en una tabla las 11 fases que había que validar y separó la validación de las tareas concretas: reescribir textos, abrir las fuentes, probar en el móvil y la tercera prueba con Copilot. |
+| **Decisión** | (1) Los cuatro integrantes revisamos y aceptamos las decisiones de las fases 1 a 5 y la rotación de roles. (2) **No reescribimos** las ideas ni el glosario: tras releerlos, consideramos que se entienden bien. (3) **No hacemos la tercera prueba** de la skill propia con Copilot. (4) No hay más conversaciones con IA que las de `conversaciones-ia/`. |
+| **Justificación** | (2) El texto ya lo habíamos revisado y es claro. En la entrevista lo explicaremos con nuestras palabras. (3) Preguntamos a la IA si era obligatoria: el apartado 3.5 del enunciado pide una prueba en una conversación distinta de la de creación, y ya hay dos (02 y 04). Queda como limitación conocida en [prueba-skill-propia.md](evidencias/prueba-skill-propia.md). |
+| **Verificación** | Juan R. abrió todos los enlaces de [fuentes.md](evidencias/fuentes.md) y confirmó lo que respaldan. Los cuatro abrimos la web publicada en nuestros móviles. Comparamos el número de eventos de cada conversación exportada con su historial: las 00 a 06 están completas. `grep` sin datos personales en la 06 nueva. |
+| **Participación** | Daniel B., Guillermo A., Juan R. y Pablo V. (validación, fuentes y móviles). La IA hizo la revisión, las ediciones, la exportación y el `push`. |
+| **Conversación de origen** | `07-claude-code-validacion-del-grupo.md` |
+
 ---
 
 ## Registro de correcciones
@@ -276,17 +291,18 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | 8 | Los enlaces a `PROCESO.md` y `README.md` desde la web no funcionarían en GitHub Pages (Jekyll convierte los `.md`) | Revisión del despliegue | Enlaces al repositorio de GitHub |
 | 9 | La web apenas trataba la compilación segura (§8.4), los *timeouts*, las expresiones regulares y los deserializadores (§8.8) ni para qué sirve un hash de integridad (§8.7) | Comparación de la web con el §8 (fase 5.c) | Una frase más en las ideas 3, 5 y 6 |
 | 10 | La conversación 05 se exportó antes de terminar (426 de 444 eventos) | Comparación del número de líneas del historial | Nueva exportación desde el historial definitivo |
+| 11 | La conversación 06 se exportó antes de terminar (262 de 349 eventos) | Comparación del número de eventos con el historial (fase 5.d) | Nueva exportación desde el historial definitivo |
 
 ## Revisión del grupo
 
 Antes de entregar, **cada integrante** debe revisar lo que le corresponde y marcarlo. Si algo se cambia, hay que añadirlo al registro de correcciones. El reparto concreto y el procedimiento de cada tarea están en [`evidencias/preparacion-entrevista.md`](evidencias/preparacion-entrevista.md).
 
 - [ ] **Todos:** leer la web completa y poder explicar las 7 ideas sin mirar (entrevista individual, fase 6).
-- [ ] **Todos:** decidir si se acepta el alcance de la fase 1 y la elección de las skills, y cambiar en este documento "Pendiente de validar por el grupo" por los nombres de quienes participaron.
-- [ ] **Contenido:** reescribir con sus palabras las ideas clave o las definiciones del glosario que no le convenzan.
-- [ ] **Verificación:** abrir cada enlace de `fuentes.md` y confirmar lo que respalda. Probar las demos con valores propios.
+- [x] **Todos:** decidir si se acepta el alcance de la fase 1 y la elección de las skills, y cambiar en este documento "Pendiente de validar por el grupo" por los nombres de quienes participaron (26/10/2026: revisado y aceptado por los cuatro).
+- [x] **Contenido:** releer las ideas clave y el glosario. Decisión: no se reescribe nada, porque el grupo considera que el texto se entiende bien.
+- [x] **Verificación:** abrir cada enlace de `fuentes.md` y confirmar lo que respalda (Juan R.).
 - [x] **Web:** crear el repositorio público `Actividad-grupal-UD1`, activar GitHub Pages y comprobar que la web se abre sin iniciar sesión (fases 5.b y 5.c).
-- [ ] **Todos:** abrir la web publicada en vuestro propio móvil. Hasta ahora sólo se ha comprobado a 360 px con Chrome automatizado (fase 5.c).
-- [ ] **Pablo V.:** tercera prueba de la skill propia con Copilot Chat, guardando la conversación con *Copy All*.
-- [ ] **Todos:** guardar en `conversaciones-ia/` **cualquier otra conversación con IA** que tengáis (Copilot, ChatGPT…) y añadir una fila en el índice.
+- [x] **Todos:** abrir la web publicada en vuestro propio móvil (además de la prueba a 360 px con Chrome automatizado de la fase 5.c).
+- [x] ~~**Pablo V.:** tercera prueba de la skill propia con Copilot Chat~~. Descartada: el enunciado no la pide y ya hay dos pruebas (fase 4.d).
+- [x] **Todos:** guardar en `conversaciones-ia/` **cualquier otra conversación con IA** que tengáis (Copilot, ChatGPT…) y añadir una fila en el índice. No hay más: todas las conversaciones del proyecto son las de `conversaciones-ia/`.
 - [x] Rellenar los nombres (nombre + inicial) en `README.md` y en la tabla de organización: Daniel B., Guillermo A., Juan R. y Pablo V.

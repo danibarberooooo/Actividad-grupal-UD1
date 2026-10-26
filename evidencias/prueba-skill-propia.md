@@ -157,7 +157,7 @@ Además:
 
 **Limitaciones que siguen ahí:**
 
-- Las dos pruebas las hizo **el mismo modelo** (Claude Opus 5.5) que redactó la skill. Convendría probarla con otra IA (por ejemplo, Copilot Chat) para ver si las instrucciones se entienden sin el estilo propio de Claude.
+- Las dos pruebas las hizo **el mismo modelo** (Claude Opus 5.5) que redactó la skill. Convendría probarla con otra IA (por ejemplo, Copilot Chat) para ver si las instrucciones se entienden sin el estilo propio de Claude. El grupo decidió no hacer esa tercera prueba porque el enunciado no la exige, así que queda como limitación conocida.
 - Los fragmentos de prueba los escribimos nosotros, con fallos "de libro". Con código real y más ambiguo la skill podría equivocarse más.
 - La revisión es estática: las correcciones propuestas **no se han ejecutado**. Las hemos revisado leyendo el código y la documentación oficial, no con pruebas.
 

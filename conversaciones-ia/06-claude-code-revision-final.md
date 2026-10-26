@@ -1,6 +1,6 @@
 # Conversación 06 · Claude Code · Segunda revisión y cierre
 
-> Exportado automáticamente del historial local de Claude Code (262 eventos).
+> Exportado automáticamente del historial local de Claude Code (349 eventos).
 > Se han anonimizado rutas locales, nombre de usuario y correo. Se omiten los recordatorios internos del sistema
 > y el razonamiento interno del modelo. Las salidas de herramientas de más de 4000 caracteres se recortan.
 
@@ -572,7 +572,7 @@ Aquí están **todas** las conversaciones con IA del proyecto. No se ha hecho ni
 
 ```json
 {
-  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && git fetch -q && git status -sb | head -3 && node --test tests/demo.test.js 2>&1 | tail -8 && echo ---- && for u in https://danibarberooooo.github.io/Actividad-grupal-UD1/ https://danibarberooooo.github.io/Actividad-grupal-UD1/css/estilos.css https://danibarberooooo.github.io/Actividad-grupal-UD1/js/demo.js https://github.com/danibarberooooo/Actividad-grupal-UD1; do echo \"$(curl -s -o /dev/null -w '%{http_code}' $u) $u\"; done && curl -s https://api.github.com/repos/danibarberooooo/Actividad-grupal-UD1 | grep -E '\"(private|has_pages|visibility)\"' && echo ---- && grep -rniE \"<dato-personal>|<dato-personal>|<dato-personal>|C:\\\\\\\\Users|C:/Users|daniel\\.b\" --exclude-dir=.git . | grep -v \"danibarberooooo\" | head -20; echo \"grep exit $?\"",
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && git fetch -q && git status -sb | head -3 && node --test tests/demo.test.js 2>&1 | tail -8 && echo ---- && for u in https://danibarberooooo.github.io/Actividad-grupal-UD1/ https://danibarberooooo.github.io/Actividad-grupal-UD1/css/estilos.css https://danibarberooooo.github.io/Actividad-grupal-UD1/js/demo.js https://github.com/danibarberooooo/Actividad-grupal-UD1; do echo \"$(curl -s -o /dev/null -w '%{http_code}' $u) $u\"; done && curl -s https://api.github.com/repos/danibarberooooo/Actividad-grupal-UD1 | grep -E '\"(private|has_pages|visibility)\"' && echo ---- && grep -rniE \"<dato-personal>|<dato-personal>[^o]|<dato-personal>|C:\\\\\\\\Users|C:/Users|daniel\\.b\" --exclude-dir=.git . | grep -v \"danibarberooooo\" | head -20; echo \"grep exit $?\"",
   "description": "Check push state, tests, live site and personal data"
 }
 ```
@@ -930,7 +930,7 @@ Empiezo por lo mecánico: volver a exportar la conversación 05, que ya terminó
 
 ```json
 {
-  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && P=~/.claude/projects/<proyecto> && node herramientas/exportar-conversacion.js \"$P/d7e799f4-2dde-4938-a20d-ad7ba787b69e.jsonl\" conversaciones-ia/05-claude-code-revision-y-publicacion.md \"Conversación 05 · Claude Code · Revisión de pendientes y publicación\" \"<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>\" && head -3 conversaciones-ia/05-claude-code-revision-y-publicacion.md && tail -c 1500 conversaciones-ia/05-claude-code-revision-y-publicacion.md && echo && grep -rniE \"<dato-personal>|<dato-personal>|<dato-personal>|<dato-personal>\" conversaciones-ia/05-claude-code-revision-y-publicacion.md | head -3; ls \"/c/Program Files/Google/Chrome/Application/chrome.exe\" \"/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe\" 2>&1",
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && P=~/.claude/projects/<proyecto> && node herramientas/exportar-conversacion.js \"$P/d7e799f4-2dde-4938-a20d-ad7ba787b69e.jsonl\" conversaciones-ia/05-claude-code-revision-y-publicacion.md \"Conversación 05 · Claude Code · Revisión de pendientes y publicación\" \"<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>\" && head -3 conversaciones-ia/05-claude-code-revision-y-publicacion.md && tail -c 1500 conversaciones-ia/05-claude-code-revision-y-publicacion.md && echo && grep -rniE \"<dato-personal>|<dato-personal>|daniel\\.<dato-personal>|<dato-personal>\" conversaciones-ia/05-claude-code-revision-y-publicacion.md | head -3; ls \"/c/Program Files/Google/Chrome/Application/chrome.exe\" \"/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe\" 2>&1",
   "description": "Re-export conversation 05 and locate a browser"
 }
 ```
@@ -1557,3 +1557,294 @@ The file <HOME>\Documents\PuestaEnProduccion\Ut1\trabajo\README.md has been upda
 ```
 
 </details>
+
+## 🤖 Claude · 2026-10-26 17:31:30 UTC
+
+Exporto esta conversación como 06, compruebo que no haya datos personales y paso los tests.
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && P=~/.claude/projects/<proyecto> && node herramientas/exportar-conversacion.js \"$P/4f00a199-e3ca-48c3-88aa-1184e945376b.jsonl\" conversaciones-ia/06-claude-code-revision-final.md \"Conversación 06 · Claude Code · Segunda revisión y cierre\" \"<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal>\" && head -3 conversaciones-ia/06-claude-code-revision-final.md && echo \"== sensibles ==\" && grep -rnoiE \".{30}(<dato-personal>|<dato-personal>|daniel\\.<dato-personal>|C:.Users|<dato-personal>|/c/Users).{30}\" --exclude-dir=.git . | grep -v \"grep -\" | cut -c1-200 | head; echo \"== correos ==\" && grep -rnoE \"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}\" --exclude-dir=.git . | grep -vE \"noreply@(anthropic|github)|users\\.noreply\" | head; echo \"== tests ==\" && node --test tests/demo.test.js 2>&1 | grep -E \"^ℹ (pass|fail)\"; git status --short",
+  "description": "Export this conversation as 06, scan for personal data, run tests"
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+Escrito conversaciones-ia/06-claude-code-revision-final.md
+# Conversación 06 · Claude Code · Segunda revisión y cierre
+
+> Exportado automáticamente del historial local de Claude Code (262 eventos).
+== sensibles ==
+./conversaciones-ia/01-claude-code-produccion.md:1591:place(/C:[\\\\/]+Users[\\\\/]+<dato-personal>\\.2/gi, \"<HOME>\")\n    .rep
+./conversaciones-ia/01-claude-code-produccion.md:1591:\"<usuario>\")\n    .replace(/<dato-personal>\\.2/gi, \"<usuario>\");\n}\n\
+./conversaciones-ia/01-claude-code-produccion.md:1684:ato-personal>|C:\\\\\\\\Users|/c/Users\" conversaciones-ia/00-*.md |
+./conversaciones-ia/01-claude-code-produccion.md:2727:ato-personal>,<dato-personal>,<dato-personal>\"; node herramientas/exportar
+./conversaciones-ia/01-claude-code-produccion.md:2727:ato-personal>|<dato-personal>|<dato-personal>|C:\\\\\\\\Users|/c/Users\" co
+./conversaciones-ia/01-claude-code-produccion.md:2866:ato-personal>,<dato-personal>,<dato-personal>\"; node herramientas/exportar
+./conversaciones-ia/01-claude-code-produccion.md:3137:ato-personal>,<dato-personal>,<dato-personal>\" && echo \"--- escaneo de da
+./conversaciones-ia/01-claude-code-produccion.md:3137:ato-personal>|<dato-personal>|<dato-personal>|C:\\\\\\\\Users|C:/Users|/c/U
+./conversaciones-ia/05-claude-code-revision-y-publicacion.md:622:l>|daniel\\.b|C:\\\\\\\\Users|C:/Users\" . | cut -c1-200 | head -20;
+./conversaciones-ia/05-claude-code-revision-y-publicacion.md:734:rutas de la carpeta personal (C:\Users\<usuario>) se sustituyen siem
+== correos ==
+== tests ==
+ℹ pass 11
+ℹ fail 0
+ M PROCESO.md
+ M README.md
+ M conversaciones-ia/05-claude-code-revision-y-publicacion.md
+ M conversaciones-ia/README.md
+ M index.html
+?? conversaciones-ia/06-claude-code-revision-final.md
+?? evidencias/preparacion-entrevista.md
+```
+
+</details>
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && grep -noiE \".{25}(<dato-personal>|<dato-personal>|<dato-personal>[^o]|C:.Users|/c/Users).{25}\" conversaciones-ia/06-claude-code-revision-final.md | head; echo \"exit $?\"; grep -c \"dato-personal\" conversaciones-ia/06-claude-code-revision-final.md",
+  "description": "Scan conversation 06 for personal data without filter"
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+575: -rniE \"<dato-personal>|<dato-personal>[^o]|<dato-personal>|C:\\\
+601:ersonal>|C:\\\\\\\\Users|C:/Users|/c/Users\" . --include=*
+602:niel\\.b|C:\\\\\\\\Users|C:/Users\" . | cut -c1-200 | head
+603:ersonal>|C:\\\\\\\\Users|C:/Users|/c/Users\" . --include=*
+788:ido, el correo ni rutas `C:\Users`. Los commits salen como
+836: de la carpeta personal (C:\Users\<usuario>) se sustituyen
+933:<dato-personal>|daniel\\.<dato-personal>|<dato-personal>\" convers
+exit 0
+13
+```
+
+</details>
+
+## 🤖 Claude · 2026-10-26 17:31:54 UTC
+
+En la línea 933 aparece `daniel\.<dato-personal>`: el exportador no lo anonimizó porque la barra invertida separa los términos. Lo sustituyo a mano en la 06.
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && f=conversaciones-ia/06-claude-code-revision-final.md && sed -i -E 's/daniel(\\\\)+\\.<dato-personal>/<dato-personal>/gI; s/<dato-personal>\\[\\^o\\]/<dato-personal>/gI' \"$f\" && grep -noiE \".{20}(<dato-personal>[^o]|daniel.{0,6}<dato-personal>).{10}\" \"$f\"; echo \"restantes: $?\"; grep -rnoiE \"daniel[^a-z]{0,6}<dato-personal>\" --exclude-dir=.git . | head",
+  "description": "Anonymize leftover surname patterns in conversation 06"
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+sed: -e expression #1, char 41: Unmatched ( or \(
+restantes: 1
+./conversaciones-ia/06-claude-code-revision-final.md:933:daniel\\.<dato-personal>
+```
+
+</details>
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && f=conversaciones-ia/06-claude-code-revision-final.md && sed -i -E 's/daniel[\\\\]+[.]<dato-personal>/<dato-personal>/gI; s/<dato-personal>[[][\\^]o[]]/<dato-personal>/gI' \"$f\" && grep -noiE \"<dato-personal>[^o]|daniel[^a-z]{0,6}<dato-personal>\" \"$f\"; echo \"restantes(1=ninguno): $?\"; grep -rnoiE \"daniel[^a-z]{0,6}<dato-personal>|<dato-personal>[^o]\" --exclude-dir=.git . | head -3",
+  "description": "Retry anonymization with bracket-escaped sed patterns"
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+restantes(1=ninguno): 1
+./conversaciones-ia/05-claude-code-revision-y-publicacion.md:622:<dato-personal>|
+./conversaciones-ia/05-claude-code-revision-y-publicacion.md:787:<dato-personal>,
+./conversaciones-ia/05-claude-code-revision-y-publicacion.md:787:<dato-personal>|
+```
+
+</details>
+
+## 🤖 Claude · 2026-10-26 17:32:06 UTC
+
+Han salido coincidencias nuevas en la 05 que antes no estaban. Al volver a exportarla he usado una lista de términos distinta de la original, y el apellido solo ya no se anonimiza. Lo compruebo.
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && grep -noiE \".{40}<dato-personal>.{15}\" conversaciones-ia/05-claude-code-revision-y-publicacion.md | grep -v danibarberooooo | head; git show HEAD:conversaciones-ia/05-claude-code-revision-y-publicacion.md | sed -n '622p' | grep -oE \".{60}dato-personal.{60}\" | head -2",
+  "description": "Inspect surname occurrences in re-exported conversation 05"
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+622:ve ==\" && grep -rniE \"<dato-personal>|<dato-personal>|<dato-personal
+787:cto\" \"<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal
+787:ccion.md && grep -ciE \"<dato-personal>|<dato-personal>|<dato-personal
+833:" && grep -noiE \".{60}(<dato-personal>|<dato-personal>|<dato-personal
+1694:\".{40}(<dato-personal>|<dato-personal>|<dato-personal>|C:.Users|<dato
+1724:ve ==\" && grep -rniE \"<dato-personal>|<dato-personal>|<dato-personal
+1725:cto\" \"<dato-personal>,<dato-personal>,<dato-personal>,<dato-personal
+1734:FileSync(f,\"utf8\");const r=t.replace(/<dato-personal>(?!oooo)/gi,\"<
+1734:f,r);console.log(\"cambios:\",(t.match(/<dato-personal>(?!oooo)/gi)||[
+1734:ision-y-publicacion.md && grep -rnoiE \"<dato-personal>(?:[^o]|$)\" -P
+es-ia | head -40; echo \"== sensitive ==\" && grep -rniE \"<dato-personal>|<dato-personal>|<dato-personal>|daniel\\.b|C:\\\\\\\\Users
+```
+
+</details>
+
+## 🤖 Claude · 2026-10-26 17:32:13 UTC
+
+En la sesión anterior se aplicó un paso extra después de exportar: sustituir `<dato-personal>` cuando no forma parte de `danibarberooooo`. Lo repito en la 05 y en la 06.
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && for f in conversaciones-ia/05-claude-code-revision-y-publicacion.md conversaciones-ia/06-claude-code-revision-final.md; do node -e 'const fs=require(\"fs\");const f=process.argv[1];const t=fs.readFileSync(f,\"utf8\");const r=t.replace(/<dato-personal>(?!oooo)/gi,\"<dato-personal>\");fs.writeFileSync(f,r);console.log(f,\"cambios:\",(t.match(/<dato-personal>(?!oooo)/gi)||[]).length)' \"$f\"; done; echo \"== repo completo ==\"; grep -rnoiP \"<dato-personal>(?!oooo)|<dato-personal>|<dato-personal>\" --exclude-dir=.git . | head; echo \"exit $? (1 = limpio)\"; git diff --stat HEAD -- conversaciones-ia/05-claude-code-revision-y-publicacion.md",
+  "description": "Replace surname in 05 and 06, then rescan the whole repo"
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+conversaciones-ia/05-claude-code-revision-y-publicacion.md cambios: 13
+conversaciones-ia/06-claude-code-revision-final.md cambios: 0
+== repo completo ==
+exit 0 (1 = limpio)
+warning: in the working copy of 'conversaciones-ia/05-claude-code-revision-y-publicacion.md', LF will be replaced by CRLF the next time Git touches it
+ .../05-claude-code-revision-y-publicacion.md       | 81 +++++++++++++++++++---
+ 1 file changed, 70 insertions(+), 11 deletions(-)
+```
+
+</details>
+
+**🔧 Herramienta `Edit`**
+
+```json
+{
+  "replace_all": false,
+  "file_path": "<HOME>\\Documents\\PuestaEnProduccion\\Ut1\\trabajo\\conversaciones-ia\\README.md",
+  "old_string": "No se anonimiza el usuario de GitHub (`danibarberooooo`), que aparece en la conversación 05: ya es público en la URL del repositorio.",
+  "new_string": "No se anonimiza el usuario de GitHub (`danibarberooooo`), que aparece en las conversaciones 05 y 06: ya es público en la URL del repositorio. Como el apellido forma parte de ese usuario, no se puede pasar al exportador como término. En las conversaciones 05 y 06 se sustituyó después, con la expresión regular `<dato-personal>(?!oooo)`, que no afecta al usuario. También se quitó a mano una aparición escrita con barra invertida dentro de un comando `grep`."
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+The file <HOME>\Documents\PuestaEnProduccion\Ut1\trabajo\conversaciones-ia\README.md has been updated successfully.
+```
+
+</details>
+
+**🔧 Herramienta `Edit`**
+
+```json
+{
+  "replace_all": false,
+  "file_path": "<HOME>\\Documents\\PuestaEnProduccion\\Ut1\\trabajo\\conversaciones-ia\\README.md",
+  "old_string": "se sustituyó después, con la expresión regular `<dato-personal>(?!oooo)`, que no afecta al usuario.",
+  "new_string": "se sustituyó después con una expresión regular que excluye el usuario de GitHub."
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+The file <HOME>\Documents\PuestaEnProduccion\Ut1\trabajo\conversaciones-ia\README.md has been updated successfully.
+```
+
+</details>
+
+## 🤖 Claude · 2026-10-26 17:32:29 UTC
+
+Último escaneo, commit y push.
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "cd \"<HOME>/Documents/PuestaEnProduccion/Ut1/trabajo\" && n=$(grep -rnoiP \"<dato-personal>(?!oooo)|<dato-personal>|<dato-personal>\" --exclude-dir=.git . | wc -l); echo \"coincidencias sensibles: $n\"; [ \"$n\" = 0 ] && git add -A && git -c user.name=\"Daniel B.\" -c user.email=\"<email>\" commit -q -F - <<'EOF' && git log --oneline -1 && git push 2>&1 | tail -2\nSegunda revisión: completa la §8 en la web, conversaciones 05 y 06 y guía de entrevista\n\n- Ideas 3, 5 y 6: timeouts y regex/deserializadores (§8.8), compilación segura (§8.4) y uso de hashes de integridad (§8.7)\n- Conversación 05 reexportada completa (444 eventos) y conversación 06 nueva\n- evidencias/preparacion-entrevista.md: tareas de cada integrante y guion de preguntas\n- PROCESO.md: fase 5.c, correcciones 9 y 10 y casillas de revisión actualizadas\n\nCo-Authored-By: Claude Opus 5.5 <<email>>\nEOF",
+  "description": "Final scan, commit and push to GitHub",
+  "timeout": 60000
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+coincidencias sensibles: 0
+warning: in the working copy of 'PROCESO.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'conversaciones-ia/05-claude-code-revision-y-publicacion.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'conversaciones-ia/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'conversaciones-ia/06-claude-code-revision-final.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'evidencias/preparacion-entrevista.md', LF will be replaced by CRLF the next time Git touches it
+4e20636 Segunda revisión: completa la §8 en la web, conversaciones 05 y 06 y guía de entrevista
+To https://github.com/danibarberooooo/Actividad-grupal-UD1.git
+   559cc70..4e20636  main -> main
+```
+
+</details>
+
+**🔧 Herramienta `Bash`**
+
+```json
+{
+  "command": "for i in 1 2 3 4 5 6; do c=$(curl -s https://danibarberooooo.github.io/Actividad-grupal-UD1/ | grep -c \"procedencia e integridad\"); [ \"$c\" -gt 0 ] && break; sleep 20; done; echo \"web publicada actualizada: $c\"",
+  "description": "Wait for GitHub Pages to serve the updated page",
+  "timeout": 180000
+}
+```
+
+<details><summary>Resultado de herramienta</summary>
+
+```
+web publicada actualizada: 1
+```
+
+</details>
+
+## 🤖 Claude · 2026-10-26 17:33:15 UTC
+
+He hecho todo lo que se podía hacer desde aquí y está subido a GitHub (commit `4e20636`). La web publicada ya muestra los cambios. Los tests siguen en verde (11 de 11) y no queda ningún dato personal en el repositorio.
+
+#### Lo que he hecho
+
+- **Conversación 05:** la he vuelto a exportar y ya está completa (444 de 444 eventos).
+- **Conversación 06:** he guardado esta revisión y la he añadido a los índices de `PROCESO.md` y `conversaciones-ia/README.md`. Le falta el último mensaje, porque se exporta desde dentro de la propia sesión; está explicado en el README.
+- **Datos personales:** al exportar de nuevo la 05 volvió a aparecer el apellido en 13 sitios, y en la 06 aparecía una vez junto al nombre. Ya está quitado de las dos, y en el README queda explicado cómo.
+- **Web:** había tres puntos del §8 que estaban flojos. He añadido una frase a cada idea:
+  - idea 3: *timeouts*, expresiones regulares y deserializadores (§8.8);
+  - idea 5: compilación segura, con procedencia e integridad de los artefactos (§8.4);
+  - idea 6: para qué sirve SHA-256, que es comprobar la integridad (§8.7).
+- **Móvil:** he comprobado la web publicada a 360 px reales. Se ve el botón «Menú» y no hay desplazamiento horizontal.
+- **`PROCESO.md`:** nueva fase 5.c con todos los campos, correcciones 9 y 10 en el registro, y la casilla de Pages marcada.
+- **Nuevo `evidencias/preparacion-entrevista.md`:** las tareas concretas de cada compañero y un guion de preguntas probables con su respuesta, para preparar la entrevista.
+
+#### Lo que no puedo hacer yo
+
+Está detallado en `evidencias/preparacion-entrevista.md`:
+
+1. **Guillermo A.:** reescribir con sus palabras al menos dos ideas o definiciones de la web.
+2. **Juan R.:** abrir los enlaces de `fuentes.md` y anotar en la fase 4.a qué encontró.
+3. **Pablo V.:** hacer la tercera prueba de la skill propia con Copilot Chat. Antes tiene que escribir el resultado esperado, y al terminar guardar la conversación con *Copy All* como `08-…`. El prompt ya está preparado en la guía.
+4. **Todos:**
+   - abrir la web en vuestro propio móvil;
+   - en `PROCESO.md`, cambiar cada «Pendiente de validar por el grupo» por quién lo revisó;
+   - preparar la entrevista con la guía.
+
+El punto 4 es lo que más nota se juega: el criterio 3 vale 30 puntos y el 7 depende de la entrevista. No he marcado como validado nada que el grupo no haya revisado, porque eso sería falsear el registro.

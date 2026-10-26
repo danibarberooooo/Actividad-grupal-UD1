@@ -1,6 +1,6 @@
 # Conversaciones originales con IA
 
-Aquí están **todas** las conversaciones con IA del proyecto. No se ha hecho ninguna selección: se incluyen la del plan inicial, la de producción, la de creación de la skill propia (dentro de la 01) y sus dos pruebas, y la de aplicación de la skill pública.
+Aquí están **todas** las conversaciones con IA del proyecto (los integrantes no han usado otras herramientas de IA). No se ha hecho ninguna selección: se incluyen la del plan inicial, la de producción, la de creación de la skill propia (dentro de la 01) y sus dos pruebas, y la de aplicación de la skill pública.
 
 | Archivo | Herramienta | Qué contiene | Fases de PROCESO.md |
 |---|---|---|---|
@@ -11,6 +11,7 @@ Aquí están **todas** las conversaciones con IA del proyecto. No se ha hecho ni
 | [`04-prueba-skill-propia-v1.1.md`](04-prueba-skill-propia-v1.1.md) | Subagente de Claude Code | Prueba 2 de la skill propia (versión mejorada), en una conversación nueva | 4.d |
 | [`05-claude-code-revision-y-publicacion.md`](05-claude-code-revision-y-publicacion.md) | Claude Code (Opus 5.5) | Revisión de lo que faltaba, nombres del grupo, git, GitHub Pages y comprobación de la web publicada | 5.b |
 | [`06-claude-code-revision-final.md`](06-claude-code-revision-final.md) | Claude Code (Opus 5.5) | Segunda revisión contra el enunciado, huecos del §8 en la web, prueba a 360 px y guía de la entrevista | 5.c |
+| [`07-claude-code-validacion-del-grupo.md`](07-claude-code-validacion-del-grupo.md) | Claude Code (Opus 5.5) | Tercera revisión, conversación 06 completa, registro de la validación del grupo y cierre de tareas | 5.d |
 
 ## Cómo se obtuvieron (y por qué no con *Copy All*)
 
@@ -30,7 +31,8 @@ Convertimos esos ficheros a Markdown con [`herramientas/exportar-conversacion.js
    node herramientas/exportar-conversacion.js ~/.claude/projects/<proyecto>/<sesión>.jsonl conversaciones-ia/01-claude-code-produccion.md "Conversación 01 · ..." "apellido,usuario"
    ```
 
-6. **Final de las conversaciones 05 y 06:** cada una se exportó primero desde su propia sesión, así que le faltaba el final. La 05 se volvió a exportar desde la sesión 06 y ya está completa (444 eventos, antes 426). La 06 se exportó desde dentro de sí misma, antes del último mensaje de la IA, así que le falta ese mensaje: el resumen final y la confirmación del `push`. Se regenera con el mismo comando, cambiando el fichero de sesión y el nombre de salida.
+6. **Final de las conversaciones 05 y 06:** cada una se exportó primero desde su propia sesión, así que le faltaba el final. La 05 se volvió a exportar desde la sesión 06 y ya está completa (444 eventos, antes 426). La 06 se volvió a exportar desde la sesión 07 y también está completa (349 eventos, antes 262), con el resumen final y la confirmación del `push`. Se regenera con el mismo comando, cambiando el fichero de sesión y el nombre de salida.
+7. **Final de la conversación 07:** se exportó desde dentro de su propia sesión, justo antes del commit, así que le faltan el commit, el `push` y el último mensaje de la IA. Es la última conversación del proyecto.
 
 ## Revisión de datos sensibles
 
