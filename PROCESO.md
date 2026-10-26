@@ -25,6 +25,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | [`02-prueba-skill-propia-v1.0.md`](conversaciones-ia/02-prueba-skill-propia-v1.0.md) | 4 | Prueba 1 de la skill propia, en una conversación nueva |
 | [`03-aplicacion-skill-publica-sharp-edges.md`](conversaciones-ia/03-aplicacion-skill-publica-sharp-edges.md) | 4 | Aplicación de la skill pública a `js/demo.js` |
 | [`04-prueba-skill-propia-v1.1.md`](conversaciones-ia/04-prueba-skill-propia-v1.1.md) | 4 | Prueba 2 de la skill propia (versión mejorada), en una conversación nueva |
+| [`05-claude-code-revision-y-publicacion.md`](conversaciones-ia/05-claude-code-revision-y-publicacion.md) | 5 | Revisión de lo que faltaba, nombres del grupo, git, GitHub Pages y comprobación de la web publicada |
 
 ---
 
@@ -229,6 +230,20 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Verificación** | `grep` final sobre todo el repositorio (ver la conversación 01). **Pendiente del grupo:** publicar en GitHub Pages, abrir la web sin iniciar sesión y revisar la web publicada en el móvil. Los enlaces ya apuntan a `danibarberooooo/Actividad-grupal-UD1`. |
 | **Participación** | IA (preparación). **Pendiente:** publicación por el responsable de web. |
 | **Conversación de origen** | `01-claude-code-produccion.md` |
+
+### 5.b Revisión de pendientes y publicación
+
+| Campo | Registro |
+|---|---|
+| **Objetivo** | Saber qué faltaba para entregar, completar los datos del grupo y publicar la web. |
+| **Herramienta** | Claude Code, en una sesión nueva (después de `/clear`). Revisión del repositorio, git y comprobación con `curl` de la web publicada. |
+| **Prompt** | «tienes que hacerme esto [enunciado] sobre este punto [sección 8 de los apuntes], mirame a ver que me falta» |
+| **Resultado** | Lista de pendientes: nombres de los integrantes, enlaces `USUARIO/REPO`, publicación en GitHub Pages, validación del grupo en *Participación*, exportar esta conversación y las de los compañeros. Además, la IA vio que la conversación 01 estaba incompleta y la volvió a exportar desde el historial definitivo (833 eventos, antes 795). |
+| **Decisión** | (1) Somos **cuatro**, así que se añade un cuarto rol, *apoyo y revisión*, y se reparte la rotación de forma que cada sesión cubre los cuatro roles. (2) Enlaces a `danibarberooooo/Actividad-grupal-UD1`: GitHub convierte los espacios del nombre en guiones. (3) Los commits salen con el autor «Daniel B.» y el correo `noreply` de GitHub, no con el correo real. (4) El repositorio se creó por error como `-Actividad-grupal-UD1`, con un guion delante. Se le cambió el nombre en GitHub en lugar de cambiar los enlaces. |
+| **Justificación** | (1) Ningún integrante se queda sin rol en ninguna sesión y nadie repite rol. (3) El historial de git es público, y el enunciado prohíbe publicar datos personales. (4) Así la URL queda limpia y no hay que tocar ningún archivo. **Riesgo aceptado:** el usuario de GitHub contiene el apellido de Daniel B., y el enlace de entrega lo muestra inevitablemente. |
+| **Verificación** | `node --test tests/demo.test.js`: 11 en verde. `grep` sin datos personales en todo el repositorio. API de GitHub: repositorio público, `has_pages: true`. En la web publicada, `index.html`, `css/estilos.css` y `js/demo.js` responden 200, los 15 enlaces externos también, y las 15 anclas internas existen. |
+| **Participación** | Daniel B. (dio los nombres y el nombre del repositorio, creó el repositorio, hizo el `push` y activó Pages). La IA hizo la revisión, las ediciones y las comprobaciones. |
+| **Conversación de origen** | `05-claude-code-revision-y-publicacion.md` |
 
 ---
 
