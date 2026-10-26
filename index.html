@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desarrollo seguro</title>
+  <meta name="description" content="Guía didáctica sobre desarrollo seguro de software: modelado de amenazas, validación de entradas, autenticación, cadena de suministro, criptografía, pruebas, mitigaciones y SSDLC.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%232563eb'/%3E%3Cpath d='m11 16 4 4 7-8' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="#inicio">🛡️ Desarrollo seguro</a>
+      <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+      <nav id="menu" class="menu" aria-label="Secciones">
+        <a href="#introduccion">Introducción</a>
+        <a href="#ideas">Ideas clave</a>
+        <a href="#demo">Demostración</a>
+        <a href="#ssdlc">Ciclo SSDLC</a>
+        <a href="#glosario">Glosario</a>
+        <a href="#fuentes">Fuentes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section id="inicio" class="portada">
+      <div class="contenedor">
+        <p class="etiqueta">PPS · Unidad 1 · Grupo 5</p>
+        <h1>Desarrollo seguro: la seguridad se diseña, no se añade al final</h1>
+        <p class="entradilla">Una guía para compañeros que quieren entender cómo se evita que un programa sea vulnerable <strong>antes</strong> de que alguien lo ataque, y qué hacer cuando, aun así, algo falla.</p>
+        <p class="portada__botones">
+          <a class="boton" href="#demo">Ir a la demostración</a>
+          <a class="boton boton--secundario" href="#ideas">Ver las 7 ideas clave</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="introduccion" class="seccion">
+      <div class="contenedor estrecho">
+        <h2>Introducción</h2>
+        <p>Muchas veces pensamos que la seguridad depende de elegir un lenguaje "seguro", de activar un cortafuegos o de que el sistema operativo nos proteja. Todo eso ayuda, pero no basta: un programa escrito en Rust o en Java puede seguir dejando entrar a quien no debe, guardar contraseñas de forma débil o caerse si recibe un archivo enorme.</p>
+        <p>El <strong>desarrollo seguro</strong> es la forma de trabajar que mete la seguridad en cada paso: cuando decidimos qué vamos a construir, cuando lo diseñamos, cuando lo programamos, cuando lo probamos y también cuando ya está funcionando y aparece un fallo nuevo. Es lo que en los apuntes se llama <strong>defensa en profundidad</strong>: varias capas, para que el fallo de una sola no comprometa todo el sistema.</p>
+        <div class="aviso">
+          <p><strong>¿Para qué te sirve?</strong> Cualquier aplicación que hagas en clase o en una empresa recibirá datos de usuarios, usará bibliotecas de terceros y guardará algún secreto (una contraseña de base de datos, un token…). Estas ideas te ayudan a no cometer los errores más frecuentes y a saber explicarlos.</p>
+        </div>
+        <p class="alcance"><strong>Alcance de esta guía:</strong> sección 8 de los apuntes (desarrollo seguro y SSDLC) y las secciones 6.2 y 6.3 (contraseñas y mitigaciones). Dejamos fuera la seguridad de memoria en detalle, los modelos de ejecución, el <em>sandboxing</em> del kernel y el caso <code>sudo-rs</code>, que se tratan en otras partes de la unidad.</p>
+      </div>
+    </section>
+
+    <section id="ideas" class="seccion seccion--alterna">
+      <div class="contenedor">
+        <h2>7 ideas clave</h2>
+        <p class="estrecho">Cada idea indica de qué parte de los apuntes sale, para que puedas ampliarla.</p>
+
+        <div class="ideas">
+          <article class="idea" id="idea-1">
+            <span class="idea__num" aria-hidden="true">1</span>
+            <h3>La seguridad es un proceso, no un producto</h3>
+            <p>No existe un "botón de seguridad" que se pulse al final. Se trabaja en capas (lenguaje, compilador, sistema operativo, aislamiento, aplicación) y en todas las fases del ciclo de vida. Si una capa falla, la siguiente debe limitar el daño.</p>
+            <p class="idea__ejemplo"><strong>Ejemplo:</strong> aunque la aplicación tenga un fallo de inyección, si su usuario de base de datos sólo puede leer una tabla, el atacante no podrá borrar el resto.</p>
+            <p class="idea__fuente">Apuntes: §1 y §8.9</p>
+          </article>
+
+          <article class="idea" id="idea-2">
+            <span class="idea__num" aria-hidden="true">2</span>
+            <h3>Antes de programar, piensa como un atacante</h3>
+            <p>El <strong>modelado de amenazas</strong> responde a cuatro preguntas: ¿qué quiero proteger (<em>activos</em>)?, ¿por dónde pueden entrar (<em>superficie de ataque</em>)?, ¿dónde cambian los niveles de confianza (<em>fronteras de confianza</em>)? y ¿qué puede salir mal (<em>amenazas</em>)?</p>
+            <p>De ahí salen dos principios: <strong>mínimo privilegio</strong> (cada pieza sólo con los permisos que necesita) y <strong>seguro por defecto</strong> (lo que viene "de fábrica" debe estar cerrado, no abierto).</p>
+            <p class="idea__fuente">Apuntes: §8.1 y §6.1</p>
+          </article>
+
+          <article class="idea" id="idea-3">
+            <span class="idea__num" aria-hidden="true">3</span>
+            <h3>Toda entrada es sospechosa: valida al entrar, codifica al salir</h3>
+            <p>Formularios, archivos, APIs, cabeceras… todo lo que viene de fuera es <strong>no confiable</strong> hasta comprobarlo. Son dos cosas distintas:</p>
+            <ul>
+              <li><strong>Validar</strong> la entrada: ¿tiene el tipo, la longitud, el rango y el formato esperados? Si no, se rechaza.</li>
+              <li><strong>Codificar</strong> la salida: al mostrar el dato en HTML, SQL o JavaScript, se transforma para que se lea como <em>texto</em> y nunca como <em>código</em>.</li>
+            </ul>
+            <p>Poner un tamaño máximo también protege la <strong>disponibilidad</strong>: evita que una entrada gigante agote la memoria o la CPU (denegación de servicio).</p>
+            <div class="flujo" role="img" aria-label="Flujo de un dato: llega desde el usuario, que no es confiable, cruza la frontera de confianza, se valida, lo procesa la lógica de la aplicación y se codifica antes de mostrarse en el navegador.">
+              <span class="flujo__paso flujo__paso--peligro">Usuario<small>no confiable</small></span>
+              <span class="flujo__frontera">frontera de confianza</span>
+              <span class="flujo__paso">Validar<small>tipo, longitud, formato</small></span>
+              <span class="flujo__flecha" aria-hidden="true">→</span>
+              <span class="flujo__paso">Lógica<small>consultas parametrizadas</small></span>
+              <span class="flujo__flecha" aria-hidden="true">→</span>
+              <span class="flujo__paso">Codificar<small>según el destino</small></span>
+              <span class="flujo__flecha" aria-hidden="true">→</span>
+              <span class="flujo__paso flujo__paso--ok">Navegador<small>lo ve como texto</small></span>
+            </div>
+            <p class="idea__fuente">Apuntes: §8.2, §8.8 y §4.1 · Pruébalo en la <a href="#demo">demostración</a></p>
+          </article>
+
+          <article class="idea" id="idea-4">
+            <span class="idea__num" aria-hidden="true">4</span>
+            <h3>Saber quién eres no es saber qué puedes hacer</h3>
+            <p><strong>Autenticación</strong> = comprobar la identidad ("eres Ana"). <strong>Autorización</strong> = comprobar permisos ("Ana puede ver <em>su</em> factura, no la de Luis"). La autorización se comprueba <strong>en cada operación sensible</strong>, no una sola vez al iniciar sesión.</p>
+            <p>La <strong>gestión de sesiones</strong> cuida el ciclo de vida de cookies y tokens: cómo se crean, dónde se guardan, cuándo caducan y cómo se revocan.</p>
+            <p class="idea__ejemplo"><strong>Error típico:</strong> cambiar <code>/facturas/1001</code> por <code>/facturas/1002</code> en la URL y ver la factura de otra persona porque el servidor sólo comprobó que había sesión iniciada.</p>
+            <p class="idea__fuente">Apuntes: §8.3 y §6.1</p>
+          </article>
+
+          <article class="idea" id="idea-5">
+            <span class="idea__num" aria-hidden="true">5</span>
+            <h3>Tu programa también es el código de otros, y los secretos no van en el código</h3>
+            <p>Las bibliotecas, frameworks y herramientas de compilación forman parte de la superficie de ataque (<strong>cadena de suministro</strong>). Por eso conviene tener un inventario (<strong>SBOM</strong>), fijar versiones y revisar los avisos de vulnerabilidades antes de actualizar.</p>
+            <p>Las claves de API, contraseñas y tokens se guardan en un <strong>gestor de secretos</strong>, nunca en el repositorio. Y los mensajes de error que ve el usuario no deben revelar detalles internos; los registros (<em>logs</em>) sirven para investigar, pero no deben guardar contraseñas ni tokens.</p>
+            <p class="idea__fuente">Apuntes: §8.4 y §8.6</p>
+          </article>
+
+          <article class="idea" id="idea-6">
+            <span class="idea__num" aria-hidden="true">6</span>
+            <h3>Las contraseñas necesitan hashes lentos; las comunicaciones, TLS</h3>
+            <p>Un hash de integridad como SHA-256 está pensado para ser <strong>rápido</strong>, y eso es justo lo que quiere un atacante que prueba millones de contraseñas. Para contraseñas se usan funciones <strong>lentas a propósito</strong> y con <strong>sal</strong> única: Argon2id, bcrypt o scrypt.</p>
+            <p>Para cifrar se usan bibliotecas consolidadas (no se inventa criptografía propia) y, en tránsito, <strong>TLS</strong> bien configurado.</p>
+            <p class="idea__fuente">Apuntes: §6.2 y §8.7 · Compruébalo en la <a href="#demo-hash">demo de contraseñas</a></p>
+          </article>
+
+          <article class="idea" id="idea-7">
+            <span class="idea__num" aria-hidden="true">7</span>
+            <h3>Prueba con varias técnicas y ten mitigaciones para lo que se escape</h3>
+            <p>Ninguna herramienta lo detecta todo, así que se combinan: <strong>SAST</strong> (lee el código sin ejecutarlo), <strong>DAST</strong> (ataca la aplicación en marcha), <strong>fuzzing</strong> (entradas raras a montones), <strong>sanitizadores</strong> como AddressSanitizer en C/C++, revisiones de código, <em>pentesting</em> y <strong>pruebas de regresión</strong> para que un fallo corregido no vuelva.</p>
+            <p>Si aun así queda un fallo de memoria, el compilador y el sistema operativo ponen trabas: <strong>ASLR</strong>, <strong>NX/DEP</strong> y <strong>stack canaries</strong>. Ojo: <strong>no eliminan la vulnerabilidad</strong>, sólo hacen más difícil explotarla.</p>
+            <p class="idea__fuente">Apuntes: §8.5 y §6.3</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="seccion">
+      <div class="contenedor">
+        <h2>Demostración práctica</h2>
+        <p class="estrecho">Tres pruebas que puedes hacer en tu navegador. Todo se ejecuta en tu equipo: no se envía nada a ningún servidor.</p>
+
+        <article class="demo" id="demo-validacion">
+          <h3>Demo 1 · Validación de entradas</h3>
+          <p>Un formulario de registro con reglas de <strong>lista blanca</strong>: decimos qué se permite, no qué se prohíbe. Escribe valores raros (espacios, <code>&lt;script&gt;</code>, <code>-5</code>, un nombre muy largo…) y observa qué regla falla.</p>
+          <form class="formulario" id="form-validacion" novalidate>
+            <div class="campo">
+              <label for="usuario">Nombre de usuario</label>
+              <input id="usuario" name="usuario" type="text" autocomplete="off" spellcheck="false" placeholder="ana_garcia">
+              <p class="ayuda">3–20 caracteres: letras minúsculas sin tilde, números o guion bajo.</p>
+            </div>
+            <div class="campo">
+              <label for="edad">Edad</label>
+              <input id="edad" name="edad" type="text" inputmode="numeric" autocomplete="off" placeholder="17">
+              <p class="ayuda">Número entero entre 14 y 120.</p>
+            </div>
+            <button class="boton" type="submit">Validar</button>
+          </form>
+          <div class="resultado" id="resultado-validacion" aria-live="polite"></div>
+          <details class="explica">
+            <summary>¿Por qué así?</summary>
+            <p>Validar con una lista blanca es más seguro que intentar adivinar todo lo malo (lista negra): siempre aparece un truco nuevo que no habíamos previsto. Además, el límite de longitud protege frente a entradas enormes. <strong>Importante:</strong> en una aplicación real esta validación debe repetirse en el <strong>servidor</strong>; la del navegador sólo mejora la experiencia, porque el atacante puede saltársela.</p>
+          </details>
+        </article>
+
+        <article class="demo" id="demo-salida">
+          <h3>Demo 2 · Codificación de salida frente a XSS</h3>
+          <p>Imagina una web de comentarios. Escribe un comentario o elige un ejemplo y compara qué pasa si la aplicación lo inserta como <strong>HTML</strong> (<code>innerHTML</code>) o como <strong>texto</strong> (<code>textContent</code>).</p>
+          <div class="campo">
+            <label for="comentario">Comentario</label>
+            <textarea id="comentario" rows="3" spellcheck="false">&lt;img src=x onerror="alert('Te he robado la cookie')"&gt;</textarea>
+          </div>
+          <div class="ejemplos" role="group" aria-label="Ejemplos de comentario">
+            <button type="button" class="chip" data-ejemplo="¡Muy buen artículo!">Comentario normal</button>
+            <button type="button" class="chip" data-ejemplo="&lt;b&gt;Texto en negrita&lt;/b&gt;">HTML inofensivo</button>
+            <button type="button" class="chip" data-ejemplo="&lt;img src=x onerror=&quot;alert('Te he robado la cookie')&quot;&gt;">Imagen con onerror</button>
+            <button type="button" class="chip" data-ejemplo="&lt;a href=&quot;javascript:alert(1)&quot;&gt;Pulsa aquí&lt;/a&gt;">Enlace javascript:</button>
+          </div>
+          <button class="boton" type="button" id="boton-publicar">Publicar comentario</button>
+          <div class="comparativa" aria-live="polite">
+            <div class="panel panel--peligro">
+              <h4>❌ Inseguro: se inserta como HTML</h4>
+              <p class="panel__nota">Así lo vería el navegador (vista aislada en un <code>iframe</code> con <code>sandbox</code>, que bloquea los scripts para que la demo sea inofensiva):</p>
+              <iframe id="vista-insegura" title="Vista del comentario insertado como HTML" sandbox="" loading="lazy"></iframe>
+              <div id="analisis-inseguro" class="analisis"></div>
+            </div>
+            <div class="panel panel--ok">
+              <h4>✅ Seguro: se inserta como texto</h4>
+              <p class="panel__nota">El navegador muestra los caracteres tal cual:</p>
+              <div id="vista-segura" class="vista-texto"></div>
+              <p class="panel__nota">Lo que realmente llega al HTML (caracteres especiales codificados):</p>
+              <pre><code id="codigo-seguro"></code></pre>
+            </div>
+          </div>
+          <details class="explica">
+            <summary>¿Por qué así?</summary>
+            <p>En el panel inseguro, el dato del usuario <strong>deja de ser dato y pasa a ser código</strong>: el navegador crea etiquetas y atributos como <code>onerror</code>, que en una página real ejecutarían JavaScript del atacante. En el panel seguro, <code>&lt;</code> se convierte en <code>&amp;lt;</code> y el navegador lo pinta como un símbolo. Es la misma regla de los apuntes para <code>eval()</code>: <em>los datos deben permanecer como datos</em>.</p>
+            <p>Fíjate en que el comentario <em>no</em> se ha rechazado: un comentario puede contener <code>&lt;</code> legítimamente. Por eso validar no basta y hace falta codificar en la salida.</p>
+          </details>
+        </article>
+
+        <article class="demo" id="demo-hash">
+          <h3>Demo 3 · ¿Por qué no SHA-256 para contraseñas?</h3>
+          <p>Calcula el hash de una contraseña con un hash <strong>rápido</strong> (SHA-256) y con una función <strong>lenta y con sal</strong> (PBKDF2-SHA256, 600 000 iteraciones) y compara cuánto tarda cada una. Un atacante con una lista de contraseñas tendría que pagar ese coste en <strong>cada intento</strong>.</p>
+          <div class="campo">
+            <label for="clave">Contraseña de prueba (no uses una real)</label>
+            <input id="clave" type="text" autocomplete="off" spellcheck="false" value="verano2024">
+          </div>
+          <button class="boton" type="button" id="boton-hash">Calcular hashes</button>
+          <div class="resultado" id="resultado-hash" aria-live="polite"></div>
+          <details class="explica">
+            <summary>¿Por qué así? Y una aclaración honesta</summary>
+            <p>Pulsa varias veces: el hash SHA-256 sale <strong>siempre igual</strong>, así que dos usuarios con la misma contraseña tendrían el mismo hash y se podrían usar tablas precalculadas. El de PBKDF2 <strong>cambia</strong> cada vez porque usa una <strong>sal aleatoria</strong> nueva.</p>
+            <p>Los apuntes recomiendan <strong>Argon2id, bcrypt o scrypt</strong>. Aquí usamos <strong>PBKDF2</strong> porque es la función lenta que el navegador trae de serie (Web Crypto API) y no necesitamos bibliotecas externas. OWASP la acepta cuando hace falta cumplir FIPS-140 y recomienda 600 000 iteraciones con HMAC-SHA256, pero prefiere Argon2id. La idea que demuestra es la misma: <strong>coste ajustable + sal única</strong>.</p>
+            <p>Los tiempos dependen de tu equipo; lo importante es la <strong>proporción</strong> entre ambos.</p>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section id="ssdlc" class="seccion seccion--alterna">
+      <div class="contenedor">
+        <h2>Diagrama: ciclo de vida de desarrollo seguro (SSDLC)</h2>
+        <p class="estrecho">La seguridad acompaña a las 7 fases. La última realimenta a la primera: lo que aprendemos de un incidente cambia los requisitos y el diseño. Pulsa en cada fase para ver qué ideas de esta guía se aplican.</p>
+        <ol class="ciclo">
+          <li class="fase"><details><summary><span class="fase__num">1</span> Requisitos y análisis</summary><p>Identificar activos, amenazas y requisitos de seguridad. → <a href="#idea-2">Idea 2</a></p></details></li>
+          <li class="fase"><details><summary><span class="fase__num">2</span> Diseño</summary><p>Fronteras de confianza, políticas de acceso, aislamiento, mínimo privilegio. → <a href="#idea-2">Idea 2</a>, <a href="#idea-4">Idea 4</a></p></details></li>
+          <li class="fase"><details><summary><span class="fase__num">3</span> Implementación</summary><p>APIs seguras, validación de datos, codificación de salida, hashes de contraseñas adecuados. → <a href="#idea-3">Idea 3</a>, <a href="#idea-6">Idea 6</a></p></details></li>
+          <li class="fase"><details><summary><span class="fase__num">4</span> Verificación</summary><p>SAST, DAST, fuzzing, sanitizadores y revisión de código. → <a href="#idea-7">Idea 7</a></p></details></li>
+          <li class="fase"><details><summary><span class="fase__num">5</span> Despliegue</summary><p>Configuración segura por defecto, mínimo privilegio y protección de secretos. → <a href="#idea-5">Idea 5</a></p></details></li>
+          <li class="fase"><details><summary><span class="fase__num">6</span> Operación y mantenimiento</summary><p>Monitorización, avisos de seguridad y actualización de dependencias. → <a href="#idea-5">Idea 5</a></p></details></li>
+          <li class="fase"><details><summary><span class="fase__num">7</span> Respuesta a incidentes</summary><p>Investigar la causa raíz, mitigar y llevar lo aprendido al diseño. Añadir una prueba de regresión. → <a href="#idea-7">Idea 7</a></p></details></li>
+        </ol>
+        <p class="ciclo__vuelta">↻ La fase 7 vuelve a la fase 1</p>
+      </div>
+    </section>
+
+    <section id="glosario" class="seccion">
+      <div class="contenedor estrecho">
+        <h2>Glosario</h2>
+        <div class="campo campo--buscar">
+          <label for="buscar-termino">Buscar término</label>
+          <input id="buscar-termino" type="search" placeholder="Ej.: sal, XSS, SBOM…" autocomplete="off">
+        </div>
+        <dl class="glosario" id="lista-glosario">
+          <div><dt>Activo</dt><dd>Lo que tiene valor y hay que proteger: datos personales, credenciales, claves criptográficas, servicios críticos.</dd></div>
+          <div><dt>ASLR</dt><dd><em>Address Space Layout Randomization</em>. El sistema operativo coloca partes del programa en direcciones de memoria aleatorias, para que el atacante no sepa a dónde saltar.</dd></div>
+          <div><dt>Autenticación</dt><dd>Comprobar que alguien (persona, servicio o proceso) es quien dice ser.</dd></div>
+          <div><dt>Autorización</dt><dd>Comprobar si una identidad ya autenticada puede hacer una operación concreta sobre un recurso concreto.</dd></div>
+          <div><dt>Cadena de suministro</dt><dd>Todo lo que interviene en construir tu software sin que lo hayas escrito tú: bibliotecas, compiladores, herramientas de compilación y repositorios de paquetes.</dd></div>
+          <div><dt>Codificación de salida</dt><dd>Transformar un dato justo antes de insertarlo en HTML, SQL, JavaScript, etc., para que se interprete como texto y no como instrucciones.</dd></div>
+          <div><dt>DAST</dt><dd>Análisis dinámico. Prueba la aplicación mientras se ejecuta, enviándole peticiones para encontrar fallos observables desde fuera.</dd></div>
+          <div><dt>Denegación de servicio (DoS)</dt><dd>Ataque que agota los recursos (CPU, memoria, conexiones…) para que el servicio deje de estar disponible. Se previene con límites, <em>timeouts</em> y cuotas.</dd></div>
+          <div><dt>Frontera de confianza</dt><dd>Punto donde se pasa de datos o componentes confiables a no confiables, o entre distintos niveles de privilegio. Ahí deben aplicarse los controles.</dd></div>
+          <div><dt>Fuzzing</dt><dd>Generar automáticamente muchísimas entradas malformadas o inesperadas para provocar caídas o comportamientos anómalos.</dd></div>
+          <div><dt>Mínimo privilegio</dt><dd>Cada componente tiene sólo los permisos imprescindibles para su función, ni uno más.</dd></div>
+          <div><dt>NX / DEP</dt><dd><em>No-eXecute / Data Execution Prevention</em>. Marca zonas de memoria de datos (como la pila) como no ejecutables.</dd></div>
+          <div><dt>Rate limiting</dt><dd>Limitar cuántas peticiones puede hacer un cliente en un tiempo dado. Frena ataques de fuerza bruta y de denegación de servicio.</dd></div>
+          <div><dt>Sal (<em>salt</em>)</dt><dd>Valor aleatorio y único por contraseña que se mezcla antes de calcular el hash. Hace que dos contraseñas iguales tengan hashes distintos.</dd></div>
+          <div><dt>Sanitizador</dt><dd>Herramienta del compilador (por ejemplo, AddressSanitizer) que añade comprobaciones al ejecutable para detectar errores de memoria durante las pruebas.</dd></div>
+          <div><dt>SAST</dt><dd>Análisis estático. Revisa el código fuente sin ejecutarlo en busca de flujos de datos peligrosos y usos inseguros de APIs.</dd></div>
+          <div><dt>SBOM</dt><dd><em>Software Bill of Materials</em>. Inventario de todos los componentes y dependencias (con versiones) que forman un software.</dd></div>
+          <div><dt>Seguro por defecto</dt><dd>La configuración inicial es la más restrictiva razonable; abrir algo requiere una decisión explícita.</dd></div>
+          <div><dt>SSDLC</dt><dd><em>Secure Software Development Life Cycle</em>. Ciclo de vida del software con actividades de seguridad en cada fase.</dd></div>
+          <div><dt>Stack canary</dt><dd>Valor de control que el compilador coloca en la pila; si cambia antes de que la función retorne, se detecta una corrupción y el programa se detiene.</dd></div>
+          <div><dt>Superficie de ataque</dt><dd>Conjunto de puntos por los que un atacante puede interactuar con el sistema: formularios, APIs, archivos, red, dependencias…</dd></div>
+          <div><dt>XSS</dt><dd><em>Cross-Site Scripting</em>. Inyectar código que se ejecuta en el navegador de otra persona dentro de una web legítima.</dd></div>
+        </dl>
+        <p id="glosario-vacio" class="ayuda" hidden>No hay ningún término que coincida.</p>
+      </div>
+    </section>
+
+    <section id="fuentes" class="seccion seccion--alterna">
+      <div class="contenedor estrecho">
+        <h2>Fuentes</h2>
+        <p>Las afirmaciones de esta guía se han contrastado con estas fuentes. El detalle de qué respalda cada una está en <a href="https://github.com/danibarberooooo/Actividad-grupal-UD1/blob/main/evidencias/fuentes.md">evidencias/fuentes.md</a>.</p>
+        <h3>Material de partida</h3>
+        <ul class="fuentes">
+          <li>Apuntes de la unidad PPS 1: <code>pps1_06 seguridad_lenguajes.md</code> (repositorio de apuntes de la profesora, de acceso restringido; versión del 13/10/2026, commit <code>741ab75</code>). Secciones usadas: §1, §4.1, §6.1–6.3, §8 y conclusión.</li>
+        </ul>
+        <h3>Fuentes adicionales</h3>
+        <ul class="fuentes">
+          <li>OWASP. <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">Password Storage Cheat Sheet</a> (parámetros de Argon2id, bcrypt, scrypt y PBKDF2).</li>
+          <li>OWASP. <a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html">Input Validation Cheat Sheet</a> (lista blanca, validación en servidor).</li>
+          <li>OWASP. <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">Cross Site Scripting Prevention Cheat Sheet</a> (codificación contextual de salida).</li>
+          <li>OWASP. <a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html">Threat Modeling Cheat Sheet</a>.</li>
+          <li>OWASP. <a href="https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html">Secrets Management Cheat Sheet</a>.</li>
+          <li>OWASP. <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">Top 10 2021 · A01 Broken Access Control</a> (ejemplo de la URL de facturas).</li>
+          <li>NIST. <a href="https://csrc.nist.gov/pubs/sp/800/218/final">SP 800-218 · Secure Software Development Framework (SSDF)</a>.</li>
+          <li>CISA. <a href="https://www.cisa.gov/sbom">Software Bill of Materials (SBOM)</a>.</li>
+          <li>Clang. <a href="https://clang.llvm.org/docs/AddressSanitizer.html">AddressSanitizer</a>.</li>
+          <li>MDN. <a href="https://developer.mozilla.org/es/docs/Web/API/Node/textContent">Node.textContent</a> y <a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveBits">SubtleCrypto.deriveBits() (PBKDF2)</a>.</li>
+        </ul>
+        <p class="ayuda">Esta web se ha elaborado con ayuda de IA (Claude Code). El proceso, los prompts y las verificaciones están documentados en <a href="https://github.com/danibarberooooo/Actividad-grupal-UD1/blob/main/PROCESO.md">PROCESO.md</a> y las conversaciones originales en <a href="https://github.com/danibarberooooo/Actividad-grupal-UD1/tree/main/conversaciones-ia">conversaciones-ia/</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>Grupo 5 · PPS · Tema: Desarrollo seguro · <a href="https://github.com/danibarberooooo/Actividad-grupal-UD1">Repositorio en GitHub</a></p>
+    </div>
+  </footer>
+
+  <script src="js/demo.js"></script>
+</body>
+</html>
