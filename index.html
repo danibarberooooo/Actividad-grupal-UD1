@@ -82,7 +82,7 @@
               <li><strong>Validar</strong> la entrada: ¿tiene el tipo, la longitud, el rango y el formato esperados? Si no, se rechaza.</li>
               <li><strong>Codificar</strong> la salida: al mostrar el dato en HTML, SQL o JavaScript, se transforma para que se lea como <em>texto</em> y nunca como <em>código</em>.</li>
             </ul>
-            <p>Poner un tamaño máximo también protege la <strong>disponibilidad</strong>: evita que una entrada gigante agote la memoria o la CPU (denegación de servicio).</p>
+            <p>Poner un tamaño máximo también protege la <strong>disponibilidad</strong>: evita que una entrada gigante agote la memoria o la CPU (denegación de servicio). Lo completan los <strong>tiempos máximos</strong> (<em>timeouts</em>), las cuotas, el <em>rate limiting</em> y el cuidado con lo que puede tardar muchísimo ante una entrada preparada: expresiones regulares, deserializadores y llamadas a servicios externos.</p>
             <div class="flujo" role="img" aria-label="Flujo de un dato: llega desde el usuario, que no es confiable, cruza la frontera de confianza, se valida, lo procesa la lógica de la aplicación y se codifica antes de mostrarse en el navegador.">
               <span class="flujo__paso flujo__paso--peligro">Usuario<small>no confiable</small></span>
               <span class="flujo__frontera">frontera de confianza</span>
@@ -109,7 +109,7 @@
           <article class="idea" id="idea-5">
             <span class="idea__num" aria-hidden="true">5</span>
             <h3>Tu programa también es el código de otros, y los secretos no van en el código</h3>
-            <p>Las bibliotecas, frameworks y herramientas de compilación forman parte de la superficie de ataque (<strong>cadena de suministro</strong>). Por eso conviene tener un inventario (<strong>SBOM</strong>), fijar versiones y revisar los avisos de vulnerabilidades antes de actualizar.</p>
+            <p>Las bibliotecas, frameworks y herramientas de compilación forman parte de la superficie de ataque (<strong>cadena de suministro</strong>). Por eso conviene tener un inventario (<strong>SBOM</strong>), fijar versiones y revisar los avisos de vulnerabilidades antes de actualizar. También se protege el propio proceso de compilación: acceso controlado al repositorio, credenciales de publicación guardadas como secretos y comprobación de que cada artefacto viene de donde dice y nadie lo ha modificado (procedencia e integridad).</p>
             <p>Las claves de API, contraseñas y tokens se guardan en un <strong>gestor de secretos</strong>, nunca en el repositorio. Y los mensajes de error que ve el usuario no deben revelar detalles internos; los registros (<em>logs</em>) sirven para investigar, pero no deben guardar contraseñas ni tokens.</p>
             <p class="idea__fuente">Apuntes: §8.4 y §8.6</p>
           </article>
@@ -117,7 +117,7 @@
           <article class="idea" id="idea-6">
             <span class="idea__num" aria-hidden="true">6</span>
             <h3>Las contraseñas necesitan hashes lentos; las comunicaciones, TLS</h3>
-            <p>Un hash de integridad como SHA-256 está pensado para ser <strong>rápido</strong>, y eso es justo lo que quiere un atacante que prueba millones de contraseñas. Para contraseñas se usan funciones <strong>lentas a propósito</strong> y con <strong>sal</strong> única: Argon2id, bcrypt o scrypt.</p>
+            <p>Un hash de integridad como SHA-256 está pensado para ser <strong>rápido</strong>, y eso es justo lo que quiere un atacante que prueba millones de contraseñas. Para contraseñas se usan funciones <strong>lentas a propósito</strong> y con <strong>sal</strong> única: Argon2id, bcrypt o scrypt. SHA-256 sigue siendo útil para lo que se diseñó, comprobar la <strong>integridad</strong>: por ejemplo, que un archivo descargado coincide con el hash que publica su autor.</p>
             <p>Para cifrar se usan bibliotecas consolidadas (no se inventa criptografía propia) y, en tránsito, <strong>TLS</strong> bien configurado.</p>
             <p class="idea__fuente">Apuntes: §6.2 y §8.7 · Compruébalo en la <a href="#demo-hash">demo de contraseñas</a></p>
           </article>

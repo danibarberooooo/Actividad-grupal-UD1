@@ -10,6 +10,7 @@ Aquí están **todas** las conversaciones con IA del proyecto. No se ha hecho ni
 | [`03-aplicacion-skill-publica-sharp-edges.md`](03-aplicacion-skill-publica-sharp-edges.md) | Subagente de Claude Code | Ejecución de la skill pública `sharp-edges` sobre `js/demo.js` | 4.c |
 | [`04-prueba-skill-propia-v1.1.md`](04-prueba-skill-propia-v1.1.md) | Subagente de Claude Code | Prueba 2 de la skill propia (versión mejorada), en una conversación nueva | 4.d |
 | [`05-claude-code-revision-y-publicacion.md`](05-claude-code-revision-y-publicacion.md) | Claude Code (Opus 5.5) | Revisión de lo que faltaba, nombres del grupo, git, GitHub Pages y comprobación de la web publicada | 5.b |
+| [`06-claude-code-revision-final.md`](06-claude-code-revision-final.md) | Claude Code (Opus 5.5) | Segunda revisión contra el enunciado, huecos del §8 en la web, prueba a 360 px y guía de la entrevista | 5.c |
 
 ## Cómo se obtuvieron (y por qué no con *Copy All*)
 
@@ -19,7 +20,7 @@ Convertimos esos ficheros a Markdown con [`herramientas/exportar-conversacion.js
 
 ## Limitaciones del registro (lo que el exportador cambia u omite)
 
-1. **Anonimización:** las rutas `C:\Users\<usuario>` aparecen como `<HOME>`, los correos como `<email>`, y el apellido y el nombre de usuario de Windows como `<dato-personal>`. No se anonimiza el usuario de GitHub (`danibarberooooo`), que aparece en la conversación 05: ya es público en la URL del repositorio.
+1. **Anonimización:** las rutas `C:\Users\<usuario>` aparecen como `<HOME>`, los correos como `<email>`, y el apellido y el nombre de usuario de Windows como `<dato-personal>`. No se anonimiza el usuario de GitHub (`danibarberooooo`), que aparece en las conversaciones 05 y 06: ya es público en la URL del repositorio. Como el apellido forma parte de ese usuario, no se puede pasar al exportador como término. En las conversaciones 05 y 06 se sustituyó después con una expresión regular que excluye el usuario de GitHub. También se quitó a mano una aparición escrita con barra invertida dentro de un comando `grep`.
 2. **Recordatorios del sistema:** se omiten los bloques `<system-reminder>`. Los inserta automáticamente la herramienta (contexto interno, avisos de cambios en ficheros) y no son mensajes del usuario ni de la IA.
 3. **Razonamiento interno:** no se incluye el razonamiento interno del modelo (*thinking*). Sí están todos los mensajes visibles, las llamadas a herramientas con sus parámetros completos y sus resultados.
 4. **Salidas largas:** los resultados de herramientas de más de 4000 caracteres (por ejemplo, el contenido de un fichero leído) se recortan, y se indica cuántos caracteres faltan. Las capturas de pantalla aparecen como `[imagen adjunta]`.
@@ -29,7 +30,7 @@ Convertimos esos ficheros a Markdown con [`herramientas/exportar-conversacion.js
    node herramientas/exportar-conversacion.js ~/.claude/projects/<proyecto>/<sesión>.jsonl conversaciones-ia/01-claude-code-produccion.md "Conversación 01 · ..." "apellido,usuario"
    ```
 
-6. **Final de la conversación 05:** se exportó desde la misma sesión, antes del último mensaje de la IA. Puede faltar ese mensaje final, que es la confirmación del commit. Se regenera con el mismo comando, cambiando el fichero de sesión y el nombre de salida.
+6. **Final de las conversaciones 05 y 06:** cada una se exportó primero desde su propia sesión, así que le faltaba el final. La 05 se volvió a exportar desde la sesión 06 y ya está completa (444 eventos, antes 426). La 06 se exportó desde dentro de sí misma, antes del último mensaje de la IA, así que le falta ese mensaje: el resumen final y la confirmación del `push`. Se regenera con el mismo comando, cambiando el fichero de sesión y el nombre de salida.
 
 ## Revisión de datos sensibles
 

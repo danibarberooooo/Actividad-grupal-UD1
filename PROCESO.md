@@ -26,6 +26,7 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | [`03-aplicacion-skill-publica-sharp-edges.md`](conversaciones-ia/03-aplicacion-skill-publica-sharp-edges.md) | 4 | Aplicación de la skill pública a `js/demo.js` |
 | [`04-prueba-skill-propia-v1.1.md`](conversaciones-ia/04-prueba-skill-propia-v1.1.md) | 4 | Prueba 2 de la skill propia (versión mejorada), en una conversación nueva |
 | [`05-claude-code-revision-y-publicacion.md`](conversaciones-ia/05-claude-code-revision-y-publicacion.md) | 5 | Revisión de lo que faltaba, nombres del grupo, git, GitHub Pages y comprobación de la web publicada |
+| [`06-claude-code-revision-final.md`](conversaciones-ia/06-claude-code-revision-final.md) | 5 | Segunda revisión contra el enunciado, huecos del §8 en la web, prueba de la web publicada a 360 px y guía de la entrevista |
 
 ---
 
@@ -245,6 +246,20 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | **Participación** | Daniel B. (dio los nombres y el nombre del repositorio, creó el repositorio, hizo el `push` y activó Pages). La IA hizo la revisión, las ediciones y las comprobaciones. |
 | **Conversación de origen** | `05-claude-code-revision-y-publicacion.md` |
 
+### 5.c Segunda revisión contra el enunciado
+
+| Campo | Registro |
+|---|---|
+| **Objetivo** | Volver a comprobar el repositorio contra la lista de comprobación y la rúbrica, y completar lo que se pudiera sin el resto del grupo. |
+| **Herramienta** | Claude Code, en una sesión nueva. `curl`, API de GitHub, `node --test`, `grep` y Chrome sin interfaz sobre la web publicada. |
+| **Prompt** | «tienes que hacerme esto [enunciado] sobre este punto [sección 8 de los apuntes], mirame a ver que me falta» y, después, «hazme y consigueme todo lo que este en tu mano de lo que falta». |
+| **Resultado** | No faltaba ningún archivo obligatorio. La IA señaló como riesgos para la nota: (1) las decisiones siguen «pendientes de validar por el grupo» (criterio 3); (2) sólo hay conversaciones de Daniel B. (criterio 7); (3) los textos de la web los redactó la IA («palabras propias», criterio 2); (4) la conversación 05 estaba incompleta (426 de 444 eventos). Al comparar la web con el §8, encontró tres puntos poco desarrollados: compilación segura (§8.4), *timeouts* y expresiones regulares y deserializadores (§8.8), y el uso correcto de los hashes de integridad (§8.7). |
+| **Decisión** | (1) Volver a exportar la 05, ya completa. (2) Añadir una frase en las ideas 3, 5 y 6 para cubrir esos puntos del §8. (3) Crear [`evidencias/preparacion-entrevista.md`](evidencias/preparacion-entrevista.md) con las tareas que sólo pueden hacer los integrantes (reescribir ideas, abrir las fuentes, tercera prueba de la skill con Copilot, probar en el móvil) y un guion de preguntas para la entrevista. (4) **No** marcar como validadas por el grupo decisiones que el grupo no ha revisado. |
+| **Justificación** | (2) El criterio 1 pide cubrir las secciones elegidas, y en la fase 1 elegimos el §8 completo. (3) La IA no puede sustituir la participación de cada integrante, pero sí dejar claro qué tiene que hacer cada uno y cómo registrarlo. (4) Sería falsear el registro. |
+| **Verificación** | API de GitHub: repositorio público y `has_pages: true`. La web, el CSS y el JS publicados responden 200. Tests: 11 de 11 en verde. `grep` sin datos personales. **Web publicada a 360 px:** la primera captura con Chrome sin interfaz salía cortada, pero no era un fallo de la web: en Windows, Chrome no baja de unos 500 px de ventana. Al cargar la web dentro de un `iframe` de exactamente 360 px se ve el botón «Menú», el texto se ajusta y no hay desplazamiento horizontal. |
+| **Participación** | Daniel B. (lanzó la revisión). La IA hizo la revisión, las ediciones y las comprobaciones. |
+| **Conversación de origen** | `06-claude-code-revision-final.md` |
+
 ---
 
 ## Registro de correcciones
@@ -259,15 +274,19 @@ Somos **cuatro** integrantes (Daniel B., Guillermo A., Juan R. y Pablo V.), no t
 | 6 | La skill propia v1.0: informe largo, sin nombre de la vulnerabilidad | Prueba 1 | Skill v1.1 |
 | 7 | `node --test tests/` (pasando la carpeta) fallaba con `MODULE_NOT_FOUND` en Node 24 | Ejecución de los tests | Se indica el fichero explícitamente: `node --test tests/demo.test.js` |
 | 8 | Los enlaces a `PROCESO.md` y `README.md` desde la web no funcionarían en GitHub Pages (Jekyll convierte los `.md`) | Revisión del despliegue | Enlaces al repositorio de GitHub |
+| 9 | La web apenas trataba la compilación segura (§8.4), los *timeouts*, las expresiones regulares y los deserializadores (§8.8) ni para qué sirve un hash de integridad (§8.7) | Comparación de la web con el §8 (fase 5.c) | Una frase más en las ideas 3, 5 y 6 |
+| 10 | La conversación 05 se exportó antes de terminar (426 de 444 eventos) | Comparación del número de líneas del historial | Nueva exportación desde el historial definitivo |
 
 ## Revisión del grupo
 
-Antes de entregar, **cada integrante** debe revisar lo que le corresponde y marcarlo. Si algo se cambia, hay que añadirlo al registro de correcciones.
+Antes de entregar, **cada integrante** debe revisar lo que le corresponde y marcarlo. Si algo se cambia, hay que añadirlo al registro de correcciones. El reparto concreto y el procedimiento de cada tarea están en [`evidencias/preparacion-entrevista.md`](evidencias/preparacion-entrevista.md).
 
 - [ ] **Todos:** leer la web completa y poder explicar las 7 ideas sin mirar (entrevista individual, fase 6).
 - [ ] **Todos:** decidir si se acepta el alcance de la fase 1 y la elección de las skills, y cambiar en este documento "Pendiente de validar por el grupo" por los nombres de quienes participaron.
 - [ ] **Contenido:** reescribir con sus palabras las ideas clave o las definiciones del glosario que no le convenzan.
 - [ ] **Verificación:** abrir cada enlace de `fuentes.md` y confirmar lo que respalda. Probar las demos con valores propios.
-- [ ] **Web:** crear el repositorio público `Actividad-grupal-UD1`, activar GitHub Pages y comprobar la web sin iniciar sesión y en el móvil. Los enlaces de `README.md` e `index.html` ya están cambiados.
+- [x] **Web:** crear el repositorio público `Actividad-grupal-UD1`, activar GitHub Pages y comprobar que la web se abre sin iniciar sesión (fases 5.b y 5.c).
+- [ ] **Todos:** abrir la web publicada en vuestro propio móvil. Hasta ahora sólo se ha comprobado a 360 px con Chrome automatizado (fase 5.c).
+- [ ] **Pablo V.:** tercera prueba de la skill propia con Copilot Chat, guardando la conversación con *Copy All*.
 - [ ] **Todos:** guardar en `conversaciones-ia/` **cualquier otra conversación con IA** que tengáis (Copilot, ChatGPT…) y añadir una fila en el índice.
 - [x] Rellenar los nombres (nombre + inicial) en `README.md` y en la tabla de organización: Daniel B., Guillermo A., Juan R. y Pablo V.
